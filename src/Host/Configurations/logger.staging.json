@@ -1,0 +1,7 @@
+{
+  "LoggerSettings": {
+    "AppName": "Jpl.WebApi",
+    "WriteToFile": false,
+    "StructuredConsoleLogging": true
+  }
+}

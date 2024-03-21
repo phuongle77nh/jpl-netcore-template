@@ -1,0 +1,16 @@
+global using Ardalis.Specification;
+global using FluentValidation;
+global using Jpl.MicroService.Application.Common.Events;
+global using Jpl.MicroService.Application.Common.Exceptions;
+global using Jpl.MicroService.Application.Common.FileStorage;
+global using Jpl.MicroService.Application.Common.Interfaces;
+global using Jpl.MicroService.Application.Common.Models;
+global using Jpl.MicroService.Application.Common.Persistence;
+global using Jpl.MicroService.Application.Common.Specification;
+global using Jpl.MicroService.Application.Common.Validation;
+global using Jpl.MicroService.Domain.Common;
+global using Jpl.MicroService.Domain.Common.Contracts;
+global using Jpl.MicroService.Shared.Notifications;
+global using MediatR;
+global using Microsoft.Extensions.Localization;
+global using Microsoft.Extensions.Logging;

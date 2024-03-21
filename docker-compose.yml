@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  web-api:
+    image: "${CONTAINER_REGISTRY_URL}/${WEB_API_IMAGE_NAME}:${TAG}"
+    container_name: ${WEB_API_NAME}
+    ports:
+        - ${WEB_API_PORT}:${WEB_API_PORT}
+    hostname: ${WEB_API_NAME}
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=http://0.0.0.0:${WEB_API_PORT}
+        - DatabaseSettings__ConnectionString=${DATABASE_CONNECTION_STRING}
+        - HangfireSettings__Storage__ConnectionString=${DATABASE_CONNECTION_STRING}
+        - ApplicationInsights__ConnectionString=${AI_CONNECTION_STRING}
+        - ApplicationInsights__CloudRoleName=${AI_CLOUD_ROLENAME}
+        - CorsSettings__Angular=${CORS_ANGULAR}
+        - JplApiUrlSetting__JplSecurity=${RSAPIURLSETTING_RSSECURITY}
+        - JplApiUrlSetting__JplAuth=${RSAPIURLSETTING_RSAUTH}
+        - DeveloperTestSettings__CustomExpiredAccounts=${DEVELOPERTEST_CUSTOMEXPIREDACCOUNT}
+        - EventBus__ConnectionString=${RABBITMQURL}
+        - EventBus__BrokerName=${EVENTBUS_BROKERNAME}
+        - EventBus__SubscriptionClientName=${EVENTBUS_SUBSCRIPTIONCLIENTNAME}
+        - EventBus__UserName=${EVENTBUS_USERNAME}
+        - EventBus__Password=${EVENTBUS_PASSWORD}
+        - SecuritySettings__JwtSettings__key=${SECURITYSETTINGS_JWTSETTINGS_KEY}
+        - JplWebUrlSetting__BaseUrl=${RSWEBURLSETTING_BASEURL}
+    networks:
+        web_api_network:
+            ipv4_address: ${IP_PRIVATE_CONTAINER}
+
+networks:
+  web_api_network:
+    name: ${CONTAINER_NETWORK}
+    external: true

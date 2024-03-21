@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web-api:
+    image: "newJplApiName"
+    container_name: newJplApiName
+    hostname: newJplApiName
+    build:
+      context: .
+      dockerfile: src/Host/Dockerfile
+    networks:
+        - web_api_network
+
+networks:
+  web_api_network:
+    name: gao_network
+    external: true

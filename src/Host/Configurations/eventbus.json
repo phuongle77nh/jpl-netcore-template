@@ -1,0 +1,11 @@
+{
+  "EventBus": {
+    "ConnectionString": "192.168.1.209",
+    "ProviderName": "RabbitMQ",
+    "BrokerName": "gao_event_bus_dev",
+    "SubscriptionClientName": "user_dev",
+    "UserName": "gao",
+    "Password": "gao@2023",
+    "RetryCount": 2
+  }
+}

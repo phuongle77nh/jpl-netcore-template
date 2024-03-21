@@ -1,0 +1,10 @@
+{
+  "SwaggerSettings": {
+    "Enable": true,
+    "Title": "User API",
+    "Version": "1.0.0",
+    "Description": "User API",
+    "ContactName": "GAO",
+    "ContactEmail": "GAO"
+  }
+}

@@ -1,0 +1,54 @@
+resources:
+- repo: rs-http-client-security
+
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - JplSecurity.Api.Client/*
+
+pool:
+  name: 'gao-local-build'
+
+variables:
+  BuildConfiguration: 'Release'
+  BuildPlatform : 'Any CPU'
+  BuildVersion: 1.4.$(Build.BuildId) #Version 1.3+ contains C# 8 nullable types
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: Restore
+  inputs:
+    command: restore
+    projects: JplSecurity.Api.Client/JplSecurity.Api.Client.csproj
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    projects: JplSecurity.Api.Client/JplSecurity.Api.Client.csproj
+    arguments: '--configuration $(BuildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: JplSecurity.Api.Client/JplSecurity.Api.Client.csproj
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+    zipAfterPublish: false
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet pack'
+  inputs:
+    command: pack
+    packagesToPack: JplSecurity.Api.Client/JplSecurity.Api.Client.csproj
+    versioningScheme: byEnvVar
+    versionEnvVar: BuildVersion
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+

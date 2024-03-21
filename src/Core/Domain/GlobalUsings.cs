@@ -1,0 +1,1 @@
+﻿global using Jpl.MicroService.Domain.Common.Contracts;

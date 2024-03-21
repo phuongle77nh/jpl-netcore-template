@@ -1,0 +1,55 @@
+name : newJplApiName-$(Build.BuildId)
+
+trigger:
+  branches:
+    include:
+      - dev
+      - qc
+      - release
+  paths:
+    include:
+      - src/*
+
+pool:
+  name: 'gao-local-build'
+
+variables:
+  ImageName: 'newJplApiName'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:  
+  - job: Build
+    displayName: Build and push Docker image
+    steps:
+    - task: DockerCompose@0
+      displayName: 'Build docker image'
+      inputs:
+        containerregistrytype: 'Container Registry'
+        dockerRegistryEndpoint: 'rs-docker-registry'
+        dockerComposeFile: '**/docker-compose.Build.yml'
+        projectName: 'newJplApiName'
+        action: 'Build services'
+        additionalImageTags: '$(Build.BuildId)'
+        includeLatestTag: true
+        arguments: --build-arg PAT=$(PAT)  --build-arg FEED_NAME=$(FEED_NAME) --build-arg FEED_USERNAME=$(FEED_USERNAME) --build-arg FEED_URL=$(FEED_URL)
+    - task: DockerCompose@0
+      displayName: 'Push docker to container registry'
+      inputs:
+        containerregistrytype: 'Container Registry'
+        dockerRegistryEndpoint: 'rs-docker-registry'
+        dockerComposeFile: '**/docker-compose.Build.yml'
+        projectName: 'newJplApiName'
+        action: 'Push services'
+        additionalImageTags: '$(Build.BuildId)'
+        includeLatestTag: true
+    - task: CopyFiles@2
+      inputs:
+        Contents: 'docker-compose.yml'
+        TargetFolder: '$(Build.artifactstagingdirectory)'
+    - task: PublishPipelineArtifact@1
+      displayName: "Publish Build Artifacts"
+      inputs:
+        targetPath: "$(Build.artifactstagingdirectory)"
+        artifact: drop

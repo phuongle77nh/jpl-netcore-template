@@ -1,0 +1,11 @@
+{
+  "JplApiUrlSetting": {
+    "JplAuth": "http://192.168.1.209:7001",
+    "JplSecurity": "http://192.168.1.209:7002",
+    "JplMail": "https://m.nextgig.tech/api/mail/send",
+    "JplMailToken": "U2FsdGVkX1871+NAMcKm+1oiFkzoLrwvyWkRZV7xy1BKyIKVK27kpCQUSzN1f8tPiGEjg5CcpSg1aisknDc8SoErP3IRijGOElJA5GQUhHxRVvMkSzRvjFFZr60HQ2db"
+  },
+  "JplWebUrlSetting": {
+    "BaseUrl": "https://inte-hrm.nextgig.tech"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "GAO Team",
+  "classifications": [
+    "MicroService",
+    "Clean Architecture",
+    "Boilerplate",
+    "macOS",
+    "Windows",
+    "Cloud",
+    "Web"
+  ],
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "identity": "Jpl.MicroService.Boilerplate",
+  "name": "Rs MicroService Boilerplate",
+  "description": "MicroService Template for .NET 7.0",
+  "shortName": "rs-microservice",
+  "sourceName": "Jpl.MicroService",
+  "preferNameDirectory": true,
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        ".template.config/**",
+        ".idea/**",
+        ".vs/**",
+        ".github/**",
+        ".git/**",
+        "cli/**",
+        "media/**",
+        "terraform/**",
+        "postman/**",
+        "**/bin/**",
+        "**/obj/**"
+      ]
+    }
+  ],
+  "symbols":{
+            "rsname":{
+                "type":"parameter",
+                "description":"replace setting",
+                "replaces":"newRsApiName",
+                "isRequired":true
+            }
+        },
+  "primaryOutputs": [
+    {
+      "path": "./"
+    }
+  ],
+  "postActions": [
+    {
+      "description": "Restore NuGet packages required by this project.",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet restore'"
+        }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    }
+  ]
+}

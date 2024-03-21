@@ -1,0 +1,10 @@
+{
+  "MailSettings": {
+    "DisplayName": "GAO",
+    "From": "restaff.demo@gmail.com",
+    "Host": "smtp.gmail.com",
+    "Password": "abcde!@#$%",
+    "Port": 465,
+    "UserName": "restaff.demo@gmail.com"
+  }
+}
