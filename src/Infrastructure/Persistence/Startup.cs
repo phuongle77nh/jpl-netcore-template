@@ -3,6 +3,7 @@ using Jpl.MicroService.Domain.Common.Contracts;
 using Jpl.MicroService.Infrastructure.Common;
 using Jpl.MicroService.Infrastructure.Persistence.ConnectionString;
 using Jpl.MicroService.Infrastructure.Persistence.Context;
+using Jpl.MicroService.Infrastructure.Persistence.Initialization;
 using Jpl.MicroService.Infrastructure.Persistence.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,12 @@ internal static class Startup
                 var databaseSettings = p.GetRequiredService<IOptions<DatabaseSettings>>().Value;
                 m.UseDatabase(databaseSettings.DBProvider, databaseSettings.ConnectionString);
             })
+
+            .AddTransient<IDatabaseInitializer, DatabaseInitializer>()
+            .AddTransient<ApplicationDbInitializer>()
+            .AddTransient<ApplicationDbSeeder>()
+            .AddServices(typeof(ICustomSeeder), ServiceLifetime.Transient)
+            .AddTransient<CustomSeederRunner>()
 
             .AddTransient<IConnectionStringSecurer, ConnectionStringSecurer>()
             .AddTransient<IConnectionStringValidator, ConnectionStringValidator>()
